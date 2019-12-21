@@ -14,12 +14,14 @@ class UserHandler implements Runnable
     Socket socket;
 
     public UserHandler(Socket s, String name,
-                       DataInputStream reader, DataOutputStream write) {
+                       DataInputStream reader, DataOutputStream write) throws IOException {
         this.reader = reader;
         this.write = write;
         this.userName = name;
         this.socket = s;
         this.isActive=true;
+
+        this.write.writeUTF("give_username");
 
     }
 
@@ -72,6 +74,18 @@ class UserHandler implements Runnable
 
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void notification(String name) throws IOException {
+        for (UserHandler userHandler : Server.listCLient)
+        {
+            userHandler.write.writeUTF(name+" is connected!");
+
+            if (userHandler.userName.equals(name) && userHandler.isActive==true)
+            {
+                continue;
+            }
         }
     }
 }

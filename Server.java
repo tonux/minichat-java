@@ -30,6 +30,7 @@ public class Server{
 
 			// Create a new handler for this request.
 			UserHandler mtch = new UserHandler(socket,"user_" + ID, reader, write);
+			mtch.notification("user_" + ID);
 
 			// Create a new Thread with this object.
 			Thread t = new Thread(mtch);
