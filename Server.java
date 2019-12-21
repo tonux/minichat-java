@@ -29,16 +29,16 @@ public class Server{
 			System.out.println("welcome to user_"+ID);
 
 			// Create a new handler for this request.
-			UserHandler mtch = new UserHandler(socket,"user_" + ID, reader, write);
-			mtch.notification("user_" + ID);
+			UserHandler userHandler = new UserHandler(socket,"user_" + ID, reader, write);
+			userHandler.notification("user_" + ID);
 
 			// Create a new Thread with this object.
-			Thread t = new Thread(mtch);
+			Thread t = new Thread(userHandler);
 
 			System.out.println("user_"+ID+" is added to user list");
 
 			// add user to list
-			listCLient.add(mtch);
+			listCLient.add(userHandler);
 
 			t.start();
 
