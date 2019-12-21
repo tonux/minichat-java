@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 class UserHandler implements Runnable
 {
     Scanner scn = new Scanner(System.in);
-    private String name;
+    private String userName;
     boolean isActive;
     final DataInputStream reader;
     final DataOutputStream write;
@@ -18,7 +18,7 @@ class UserHandler implements Runnable
                        DataInputStream reader, DataOutputStream write) {
         this.reader = reader;
         this.write = write;
-        this.name = name;
+        this.userName = name;
         this.socket = s;
         this.isActive=true;
 
@@ -33,8 +33,6 @@ class UserHandler implements Runnable
             try
             {
                 received = reader.readUTF();
-
-                // System.out.println(received);
 
                 if(received.equals("quit")){
                     this.isActive=false;
@@ -52,13 +50,13 @@ class UserHandler implements Runnable
 
                 }
 
-                for (UserHandler mc : Server.listCLient)
+                for (UserHandler userHandler : Server.listCLient)
                 {
-                    System.out.println(mc.name + " : "+recipient);
+                    System.out.println(userHandler.userName + " : "+recipient);
 
-                    if (mc.name.equals(recipient) && mc.isActive==true)
+                    if (userHandler.userName.equals(recipient) && userHandler.isActive==true)
                     {
-                        mc.write.writeUTF("<<"+this.name+" >> : "+msgToSend);
+                        userHandler.write.writeUTF("<<"+this.userName+" >> : "+msgToSend);
                         break;
                     }
                 }
