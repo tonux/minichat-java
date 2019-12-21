@@ -21,12 +21,12 @@ public class Server{
 		{
 			socket = serverSocket.accept();
 
-			System.out.println("New user request received : " + socket);
+			System.out.println("New connexion : " + socket);
 
 			DataInputStream reader = new DataInputStream(socket.getInputStream());
 			DataOutputStream write = new DataOutputStream(socket.getOutputStream());
 
-			System.out.println("Creating a new handler for user_"+ID);
+			System.out.println("welcome to user_"+ID);
 
 			// Create a new handler for this request.
 			UserHandler mtch = new UserHandler(socket,"user_" + ID, reader, write);
@@ -34,7 +34,7 @@ public class Server{
 			// Create a new Thread with this object.
 			Thread t = new Thread(mtch);
 
-			System.out.println("Adding this user to active user list");
+			System.out.println("user_"+ID+" is added to user list");
 
 			// add user to list
 			listCLient.add(mtch);

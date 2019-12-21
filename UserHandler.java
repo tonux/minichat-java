@@ -40,23 +40,23 @@ class UserHandler implements Runnable
                     break;
                 }
 
-                String msgToSend = null;
-                String recipient = null;
+                String message = null;
+                String receiver = null;
                 try{
                     StringTokenizer st = new StringTokenizer(received, ":");
-                    recipient = st.nextToken();
-                    msgToSend = st.nextToken();
+                    receiver = st.nextToken();
+                    message = st.nextToken();
                 } catch (Exception e){
 
                 }
 
                 for (UserHandler userHandler : Server.listCLient)
                 {
-                    System.out.println(userHandler.userName + " : "+recipient);
+                    System.out.println(userHandler.userName + " send to "+receiver+ " message : "+message);
 
-                    if (userHandler.userName.equals(recipient) && userHandler.isActive==true)
+                    if (userHandler.userName.equals(receiver) && userHandler.isActive==true)
                     {
-                        userHandler.write.writeUTF("<<"+this.userName+" >> : "+msgToSend);
+                        userHandler.write.writeUTF("<<"+this.userName+" >> : "+message);
                         break;
                     }
                 }
