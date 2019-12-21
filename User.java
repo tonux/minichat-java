@@ -9,13 +9,11 @@ public class User
     final static String ServerURL = "localhost";
     final static int ServerPort = 3000;
 
-    public static void main(String args[]) throws UnknownHostException, IOException
+    public static void main(String args[]) throws IOException
     {
         Scanner scn = new Scanner(System.in);
 
-        InetAddress ip = InetAddress.getByName(ServerURL);
-
-        Socket socket = new Socket(ip, ServerPort);
+        Socket socket = new Socket(ServerURL, ServerPort);
 
         DataInputStream dis = new DataInputStream(socket.getInputStream());
         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());

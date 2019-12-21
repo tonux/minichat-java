@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 class UserHandler implements Runnable
 {
-    Scanner scn = new Scanner(System.in);
     private String userName;
     boolean isActive;
     final DataInputStream reader;
@@ -62,7 +61,7 @@ class UserHandler implements Runnable
                 }
             } catch (IOException e) {
 
-                e.printStackTrace();
+                // e.printStackTrace();
             }
 
         }
