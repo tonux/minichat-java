@@ -15,8 +15,8 @@ public class User
 
         Socket socket = new Socket(ServerURL, ServerPort);
 
-        DataInputStream dis = new DataInputStream(socket.getInputStream());
-        DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+        DataInputStream reader = new DataInputStream(socket.getInputStream());
+        DataOutputStream write = new DataOutputStream(socket.getOutputStream());
 
         // sender message thread
         Thread sendMessage = new Thread(new Runnable()
@@ -28,7 +28,7 @@ public class User
                     String message = scn.nextLine();
 
                     try {
-                        dos.writeUTF(message);
+                        write.writeUTF(message);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -44,7 +44,7 @@ public class User
 
                 try {
                         while (true ){
-                        String messageReceive = dis.readUTF();
+                        String messageReceive = reader.readUTF();
                         System.out.println(messageReceive);
                         }
                     } catch (IOException e) {
