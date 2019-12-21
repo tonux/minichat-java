@@ -21,7 +21,7 @@ class UserHandler implements Runnable
         this.socket = s;
         this.isActive=true;
 
-        this.write.writeUTF("give_username");
+        // this.write.writeUTF("give_username");
 
     }
 
